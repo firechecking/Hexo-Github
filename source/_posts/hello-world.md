@@ -14,7 +14,7 @@ Welcome to [Hexo](https://hexo.io/)! This is your very first post. Check [docume
 $ hexo new "My New Post"
 ```
 
-More info: [Writing](https://hexo.io/docs/writing.html)
+More info: [Writing](https://hexo.io/docs/writing.html)<!--more-->
 
 ### Run server
 
@@ -134,4 +134,23 @@ var duoshuoQuery = {short_name:"firechecking"};
 	comments: true
 	---
 	```
+
+1. 插入图片
+	1. hexo根目录_config.yml中修改post_asset_folder:true
+	1. hexo根目录执行
 	
+			npm install hexo-asset-image --save
+
+	1. 将资源文件放在文章同级目录。例如：
+			
+			/source/_posts/hello-world.md
+			/source/_posts/hello-world/test.jpg
+			
+	1. 按照markdown正常语法，使用以下语句插入图片
+		
+			![testImage](hello-world/test.jpg)
+
+1. 首先不显示全文
+	1. 在文章中不需要显示在首页的前面插入如下语句即可
+	
+			<!--more-->
