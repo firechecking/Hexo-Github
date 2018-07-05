@@ -1,6 +1,8 @@
 ---
 title: Hello World
 mathjax: true
+tags: [Hexo]
+categories: [Hexo,使用教程]
 comments: true
 ---
 

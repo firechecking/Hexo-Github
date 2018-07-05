@@ -10,6 +10,8 @@ comments: true
 <http://kaldi-asr.org/doc/index.html>
 ## Mac OSX 10.11.5下的Kaldi安装与部署教程
 <https://changkun.us/archives/2016/06/81/><!--more-->
+## 相关文章
+* [从声学模型算法总结 2016 年语音识别的重大进步](http://www.leiphone.com/news/201701/ZEDsG4fOpI2zr2OA.html)
 
 ## About the Kaldi project
 * compile against the OpenFst toolkit
@@ -60,4 +62,50 @@ comments: true
 
 ### Reading and modifying the code
 1. Common utilities
-	* 
+	* base/kaldi-common.h
+	* This #includes a number of things from the base/ directory that are used by almost every Kaldi program.
+	* the matrix/ directory only depends on the base/ directory.
+1. Matrix library
+	* This library is basically a C++ wrapper for BLAS and LAPACK
+1. Acoustic modeling code
+	* gmm/diag-gmm.h (this class stores a Gaussian Mixture Model)。This is just a single GMM, not a whole collection of GMMs
+	* gmm/am-diag-gmm.h; this class stores a collection of GMMs
+1. Feature extraction code
+	* MfccOptions struct give some idea what kind of options are supported in MFCC feature extraction
+1. Acoustic decision-tree and HMM topology code
+	* tree/build-tree.h is the main top-level function for building the decision tree. returns a pointer the type EventMap. 
+	* EventMap is a type that stores a function from a set of (key, value) pairs to an integer. but the keys represent phonetic-context positions (typically 0, 1 or 2. There is also a special key, -1, that roughly represents the position in the HMM.) and the values represent phones.
+	* In hmm/hmm-topology.h. Class HmmTopology defines a set of HMM topologies for a number of phones.(对每个音素的隐马尔科夫矩阵)
+
+## Kaldi for Dummies tutorial
+### Introduction
+* This is a step by step tutorial for absolute beginners on how to create a simple ASR (Automatic Speech Recognition) system in Kaldi toolkit using your own set of data.
+* You will learn how to install Kaldi, how to make it work and how to run an ASR system using your own audio data. As an effect you will get your first speech decoding results.
+
+### Environment
+* use Linux(write with the environment Ubuntu 14.10)
+* kaldi-trunk - main Kaldi directory which contains:
+	* egs – example scripts allowing you to quickly build ASR systems for over 30 popular speech corporas (documentation is attached for each project)
+	* misc – additional tools and supplies, not needed for proper Kaldi functionality
+	* src – Kaldi source code
+	* tools – useful components and external tools
+	* windows – tools for running Kaldi using Windows.
+
+### Your exemplary project
+* You have some amount of audio data that contain only spoken digits by at least several different speakers.
+
+### Data preparation
+1. Audio data
+	* a set of 100 files
+	* 10 different speakers
+	* Task
+		* put all of one person's audio files to test folder. Put the rest (9 speakers) into train folder
+1. Acoustic data
+	* some text files that will allow Kaldi to communicate with your audio data.
+	* a text file with some number of strings
+1. Language data
+### Project finalization
+### Running scripts creation
+### Getting results
+
+## Examples included with Kaldi
